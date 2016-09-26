@@ -1,0 +1,63 @@
+{
+  "session": "",
+  "lists": [
+    {
+      "id": 1234,
+      "title": "My List"
+    }
+  ],
+  "member": {
+    "addresses": [
+      {
+        "floor": "01",
+        "street": "Raffles Place",
+        "building": "RedMart Tower",
+        "zip": "123123",
+        "postcode": "123123",
+        "country": "SG",
+        "city": "SG",
+        "source": "MANUAL",
+        "id": 700007,
+        "type": 3,
+        "priority": 1,
+        "instructions": "",
+        "unit_number": "01",
+        "building_no": "13",
+        "source_id": 0,
+        "address_type": "C",
+        "first_name": "John",
+        "last_name": "Smith"
+      }
+    ],
+    "email": "example@gmail.com",
+    "id": 3456,
+    "intercom": "12483f699fd55e5a5b731e9382afe6309eb4bb003a1d0ee610b95a877d5147cd",
+    "postcode": "123123",
+    "stats": {
+      "last_order_date": "2016-09-21T08:13:48Z",
+      "total_weight": 673.3
+    },
+    "status": 1,
+    "contact_number": "55555555",
+    "erpCustNum": 135789,
+    "first_name": "John",
+    "in_groups": [
+      {
+        "id": 1,
+        "title": "General"
+      }
+    ],
+    "last_name": "Smith",
+    "member_since": "2014-07-22T05:00:48Z",
+    "mobile_number": "55555555",
+    "referral_token": "johnsmith007",
+    "updated_at": "2016-01-07T12:28:12Z",
+    "member_order_count": 59,
+    "preferred_locale": "en-SG"
+  },
+  "credit": {},
+  "status": {
+    "msg": "Welcome to RedMart.com. Checkout our latest deals at…",
+    "code": 1300
+  }
+}
