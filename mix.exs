@@ -1,4 +1,4 @@
-defmodule RedmartClient.Mixfile do
+defmodule Redmart.Client.Mixfile do
   use Mix.Project
 
   def project do

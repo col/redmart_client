@@ -1,4 +1,4 @@
-defmodule RedmartClient do
+defmodule Redmart.Client do
   use HTTPoison.Base
 
   def start(:normal, []) do
@@ -7,7 +7,7 @@ defmodule RedmartClient do
 
   def login(email, password) do
     request_body = %{ "email": email, "password": password } |> Poison.encode!
-    case RedmartClient.post("/members/login", request_body) do
+    case Redmart.Client.post("/members/login", request_body) do
       {:ok, %{headers: headers}} ->
         store_cookie(headers)
         :ok
@@ -34,7 +34,7 @@ defmodule RedmartClient do
   #     # "discrepancy": false,
   #     # "trackingPrefix": "miniShelf"
   #   }
-  #   case RedmartClient.put!("/cart/11111", request_body) do
+  #   case Redmart.Client.put!("/cart/11111", request_body) do
   #     response = %{status_code: 200} ->
   #       IO.puts "Add Item successful"
   #       IO.puts "Response = #{inspect(response)}"
@@ -47,8 +47,9 @@ defmodule RedmartClient do
   # end
 
   def cart() do
-    case RedmartClient.get!("/cart?session=#{session_id}") do
+    case Redmart.Client.get!("/cart?session=#{session_id}") do
       %{body: body, status_code: 200} ->
+        Poison.decode(body)
         {:ok, body}
       _ ->
         {:error, "Request failed"}

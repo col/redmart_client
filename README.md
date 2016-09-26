@@ -1,4 +1,4 @@
-# RedmartClient
+# Redmart.Client
 
 **TODO: Add description**
 
