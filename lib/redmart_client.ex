@@ -11,7 +11,7 @@ defmodule RedmartClient do
       {:ok, %{headers: headers}} ->
         store_cookie(headers)
         :ok
-      {:error, resp} ->
+      {:error, _} ->
         :error
     end
   end
@@ -48,9 +48,9 @@ defmodule RedmartClient do
 
   def cart() do
     case RedmartClient.get!("/cart?session=#{session_id}") do
-      response = %{body: body, status_code: 200} ->
+      %{body: body, status_code: 200} ->
         {:ok, body}
-      response ->
+      _ ->
         {:error, "Request failed"}
     end
   end
@@ -64,6 +64,13 @@ defmodule RedmartClient do
   end
 
   defp process_request_headers(headers) do
+    Map.merge(
+      Enum.into(default_headers, %{}),
+      Enum.into(headers, %{})
+    ) |> Map.to_list
+  end
+
+  defp default_headers do
     [ "Content-Type": "application/json" ]
   end
 
