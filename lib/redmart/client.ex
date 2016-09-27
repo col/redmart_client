@@ -1,5 +1,6 @@
 defmodule Redmart.Client do
   use HTTPoison.Base
+  alias Redmart.Client
   alias Redmart.Models.{Cart, SearchResult}
 
   def start(:normal, []) do
@@ -8,7 +9,7 @@ defmodule Redmart.Client do
 
   def login(email, password) do
     request_body = %{ "email": email, "password": password } |> Poison.encode!
-    case Redmart.Client.post("/members/login", request_body) do
+    case Client.post("/members/login", request_body) do
       {:ok, %{headers: headers}} ->
         store_cookie(headers)
         :ok
@@ -26,28 +27,24 @@ defmodule Redmart.Client do
     session_id != ""
   end
 
-  # def add_item(item_id, qty) do
-  #   request_body = %{
-  #     "session": session_id,
-  #     "id": item_id,
-  #     "qty": qty
-  #   }
-  #   case Redmart.Client.put!("/cart/11111", request_body) do
-  #     response = %{status_code: 200} ->
-  #       IO.puts "Add Item successful"
-  #       IO.puts "Response = #{inspect(response)}"
-  #       :ok
-  #     response ->
-  #       IO.puts "Add Item failed"
-  #       IO.puts "Response = #{inspect(response)}"
-  #       :error
-  #   end
-  # end
+  def add_item(item_id, qty) do
+    request_body = %{
+      "session": session_id,
+      "id": item_id,
+      "qty": qty
+    }
+    case Client.put!("/cart/#{item_id}", Poison.encode!(request_body)) do
+      %{status_code: 200} ->
+        :ok
+      _ ->
+        :error
+    end
+  end
 
   def cart() do
-    case Redmart.Client.get!("/cart?session=#{session_id}") do
-      %{body: response, status_code: 200} ->
-        {:ok, Cart.new(response["cart"])}
+    case Client.get!("/cart?session=#{session_id}") do
+      %{body: body, status_code: 200} ->
+        {:ok, Cart.new(body["cart"])}
       _ ->
         {:error, "Request failed"}
     end
@@ -60,9 +57,9 @@ defmodule Redmart.Client do
       "sort": 1,
       "session": session_id
     }
-    case Redmart.Client.get!("/catalog/search?#{URI.encode_query(query)}") do
-      %{body: response, status_code: 200} ->
-        {:ok, SearchResult.new(response)}
+    case Client.get!("/catalog/search?#{URI.encode_query(query)}") do
+      %{body: body, status_code: 200} ->
+        {:ok, SearchResult.new(body)}
       _ ->
         {:error, "Request failed"}
     end
