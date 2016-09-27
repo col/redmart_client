@@ -14,7 +14,7 @@ defmodule Redmart.Models.CartTest do
     assert cart.id == data["id"]
     assert cart.items == data["items"]
     assert cart.member_order_count == data["member_order_count"]
-    assert cart.state == data["status"]
+    assert cart.state == data["state"]
     assert cart.total == data["total"]
   end
 

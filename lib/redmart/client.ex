@@ -1,5 +1,6 @@
 defmodule Redmart.Client do
   use HTTPoison.Base
+  alias Redmart.Models.Cart
 
   def start(:normal, []) do
     Agent.start_link(fn -> "" end, name: :session_id)
@@ -48,9 +49,8 @@ defmodule Redmart.Client do
 
   def cart() do
     case Redmart.Client.get!("/cart?session=#{session_id}") do
-      %{body: body, status_code: 200} ->
-        Poison.decode(body)
-        {:ok, body}
+      %{body: response, status_code: 200} ->
+        {:ok, Cart.new(response["cart"])}
       _ ->
         {:error, "Request failed"}
     end
