@@ -1,0 +1,206 @@
+{
+  "products": [
+    {
+      "category_tags": [
+        "dairy-chilled",
+        "milk-butter-eggs",
+        "fresh-milk",
+        "beverages",
+        "fresh-milk-2",
+        "fresh-milk-221",
+        "full-cream-milk",
+        "fresh-milk-2"
+      ],
+      "id": 15704,
+      "title": "Pura Fresh Milk",
+      "desc": "Pura Goodness Every Day! Pura Milk is made from 100% Australian fresh milk. It has a delicious, smooth and creamy taste, the whole family will enjoy. Plus it contains all the goodness of milk!",
+      "sku": "9310078024503",
+      "categories": [
+        221,
+        227,
+        2,
+        3830,
+        4261,
+        3830
+      ],
+      "types": [
+        1606,
+        4265
+      ],
+      "details": {
+        "prod_type": 0,
+        "uri": "pura-fresh-milk-15704",
+        "status": 1,
+        "is_new": 0,
+        "storage_class": "Fresh2-5",
+        "country_of_origin": "Australia"
+      },
+      "product_life": {
+        "time": 5,
+        "metric": "D",
+        "is_minimum": true
+      },
+      "filters": {
+        "mfr_name": "F&N",
+        "is_organic": 0,
+        "country_of_origin": "Australia",
+        "vendor_name": "F&N",
+        "brand_name": "Pura",
+        "brand_uri": "pura",
+        "frequency": 4903,
+        "trending_frequency": 888
+      },
+      "img": {
+        "h": 0,
+        "name": "/i/m/Pura_Fresh_milk_hires_1454392856995.jpg",
+        "w": 0,
+        "position": 0
+      },
+      "images": [
+        {
+          "h": 0,
+          "w": 0,
+          "name": "/i/m/Pura_Fresh_milk_hires_1454392856995.jpg",
+          "position": 0
+        },
+        {
+          "h": 0,
+          "w": 0,
+          "name": "/i/m/Pura_Fresh_Milk_Side_1454392859308.jpg",
+          "position": 1
+        }
+      ],
+      "measure": {
+        "wt_or_vol": "1 L",
+        "size": 0
+      },
+      "pricing": {
+        "on_sale": 0,
+        "price": 3.6,
+        "promo_price": 0,
+        "savings_type": 0,
+        "savings_text": "",
+        "savings": 20.14
+      },
+      "warehouse": {
+        "measure": {
+          "vol": 1,
+          "vol_metric": "L",
+          "wt_metric": "",
+          "l": 0,
+          "w": 0,
+          "h": 0
+        }
+      },
+      "attributes": {
+        "dag": []
+      },
+      "promotions": [
+        {
+          "id": 35826,
+          "type": 3,
+          "savings_text": "Mix any 3 save 20%",
+          "promo_label": "Mix Any 3 save 20%"
+        }
+      ],
+      "inventory": {
+        "__v": 0,
+        "max_sale_qty": 48,
+        "qty_in_carts": 3,
+        "qty_in_stock": 843,
+        "stock_status": 1
+      },
+      "pr": 1
+    }
+  ],
+  "facets": {
+    "categories": [
+      {
+        "id": 221,
+        "name": "Dairy & Chilled",
+        "uri": "dairy-chilled",
+        "count": 3,
+        "image": "/i/m/8888470010208_1430134346578.jpg"
+      },
+      {
+        "id": 2,
+        "name": "Beverages",
+        "uri": "beverages",
+        "count": 3,
+        "image": "/i/m/OSK_Tokuho_Powderd_Green_Tea10p_1458717527243.jpg"
+      }
+    ]
+  },
+  "filters": {
+    "options": [
+      {
+        "name": "Brands",
+        "uri": "brand",
+        "types": [
+          {
+            "count": 3,
+            "name": "Pura",
+            "uri": "pura"
+          }
+        ]
+      },
+      {
+        "name": "Price",
+        "uri": "price",
+        "types": [
+          {
+            "count": 0,
+            "name": "<$3",
+            "uri": "0-2.99"
+          },
+          {
+            "count": 3,
+            "name": "$3-$5",
+            "uri": "3-5"
+          },
+          {
+            "count": 0,
+            "name": "$5-$10",
+            "uri": "5-10"
+          },
+          {
+            "count": 0,
+            "name": "$10-$25",
+            "uri": "10-25"
+          },
+          {
+            "count": 0,
+            "name": ">$25",
+            "uri": "25.01-"
+          }
+        ]
+      }
+    ],
+    "toggles": [
+      {
+        "name": "All",
+        "uri": "all"
+      },
+      {
+        "name": "New",
+        "uri": "is_new"
+      },
+      {
+        "name": "On Sale",
+        "uri": "on_sale"
+      },
+      {
+        "name": "In Stock",
+        "uri": "stock_status"
+      }
+    ]
+  },
+  "on_sale_count": 3,
+  "status": {
+    "msg": "Listing products",
+    "code": 0
+  },
+  "total": 3,
+  "page": 0,
+  "page_size": 1
+}

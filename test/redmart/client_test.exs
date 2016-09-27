@@ -1,6 +1,7 @@
 defmodule Redmart.ClientTest do
   use ExUnit.Case
   alias Redmart.Client
+  alias Redmart.Models.{Cart, SearchResult}
   doctest Redmart.Client
 
   @email Application.get_env(:redmart_client, :email)
@@ -34,7 +35,13 @@ defmodule Redmart.ClientTest do
   @tag :logged_in
   test "cart" do
     {:ok, cart} = Client.cart
-    assert cart.__struct__ == Redmart.Models.Cart
+    assert cart.__struct__ == Cart
+  end
+
+  @tag :logged_in
+  test "search" do
+    {:ok, result} = Client.search("Pura Fresh Milk")
+    assert result.__struct__ == SearchResult
   end
 
 end

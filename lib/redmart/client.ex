@@ -1,6 +1,6 @@
 defmodule Redmart.Client do
   use HTTPoison.Base
-  alias Redmart.Models.Cart
+  alias Redmart.Models.{Cart, SearchResult}
 
   def start(:normal, []) do
     Agent.start_link(fn -> "" end, name: :session_id)
@@ -30,10 +30,7 @@ defmodule Redmart.Client do
   #   request_body = %{
   #     "session": session_id,
   #     "id": item_id,
-  #     "qty": qty,
-  #     # "qty_in_stock": 761,
-  #     # "discrepancy": false,
-  #     # "trackingPrefix": "miniShelf"
+  #     "qty": qty
   #   }
   #   case Redmart.Client.put!("/cart/11111", request_body) do
   #     response = %{status_code: 200} ->
@@ -51,6 +48,21 @@ defmodule Redmart.Client do
     case Redmart.Client.get!("/cart?session=#{session_id}") do
       %{body: response, status_code: 200} ->
         {:ok, Cart.new(response["cart"])}
+      _ ->
+        {:error, "Request failed"}
+    end
+  end
+
+  def search(search_term) do
+    query = %{
+      "q": search_term,
+      "pageSize": 1,
+      "sort": 1,
+      "session": session_id
+    }
+    case Redmart.Client.get!("/catalog/search?#{URI.encode_query(query)}") do
+      %{body: response, status_code: 200} ->
+        {:ok, SearchResult.new(response)}
       _ ->
         {:error, "Request failed"}
     end
