@@ -1,7 +1,9 @@
 defmodule Redmart.Client do
   use HTTPoison.Base
   alias Redmart.Client
-  alias Redmart.Models.{Cart, SearchResult}
+  alias Redmart.Models.{Cart, SearchResult, AddItemResponse}
+
+  @apiConsumerId "55a87a41-6c5b-4f51-b283-651ac6ede647"
 
   def start(:normal, []) do
     Agent.start_link(fn -> "" end, name: :session_id)
@@ -29,20 +31,29 @@ defmodule Redmart.Client do
 
   def add_item(item_id, qty) do
     request_body = %{
-      "session": session_id,
-      "id": item_id,
-      "qty": qty
+      "session" => session_id,
+      "id" => item_id,
+      "qty" => qty,
+      "apiConsumerId" => @apiConsumerId
     }
-    case Client.put!("/cart/#{item_id}", Poison.encode!(request_body)) do
-      %{status_code: 200} ->
-        :ok
+    query = %{
+      "session" => session_id,
+      "apiConsumerId" => @apiConsumerId
+    }
+    case Client.put!("/cart/#{item_id}?#{URI.encode_query(query)}", Poison.encode!(request_body)) do
+      %{body: body, status_code: 200} ->
+        {:ok, AddItemResponse.new(body)}
       _ ->
-        :error
+        {:error, "request failed"}
     end
   end
 
   def cart() do
-    case Client.get!("/cart?session=#{session_id}") do
+    query = %{
+      "session" => session_id,
+      "apiConsumerId" => @apiConsumerId
+    }
+    case Client.get!("/cart?#{URI.encode_query(query)}") do
       %{body: body, status_code: 200} ->
         {:ok, Cart.new(body["cart"])}
       _ ->

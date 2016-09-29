@@ -4,12 +4,14 @@ defmodule Redmart.Models.ProductTest do
 
   @example_data %{
     "id" => 1,
-    "title" => "Little Creatures Pale Ale"
+    "title" => "Little Creatures Pale Ale",
+    "qty" => 2
   }
 
   @expected %Product{
     id: 1,
-    title: "Little Creatures Pale Ale"
+    title: "Little Creatures Pale Ale",
+    qty: 2
   }
 
   test "create with json" do

@@ -47,7 +47,7 @@ defmodule Redmart.ClientTest do
   @tag :logged_in
   test "add item to cart" do
     milk_id = Application.get_env(:redmart_client, :milk_product_id)
-    assert :ok = Client.add_item(milk_id, 1)
+    assert {:ok, response} = Client.add_item(milk_id, 1)    
   end
 
 end
