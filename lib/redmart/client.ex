@@ -61,10 +61,11 @@ defmodule Redmart.Client do
     end
   end
 
-  def search(search_term) do
+  def search(search_term, page_size \\ 10, page \\ 0) do
     query = %{
       "q": search_term,
-      "pageSize": 1,
+      "pageSize": page_size,
+      "page": page,
       "sort": 1,
       "session": session_id
     }
