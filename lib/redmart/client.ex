@@ -5,31 +5,22 @@ defmodule Redmart.Client do
 
   @apiConsumerId "55a87a41-6c5b-4f51-b283-651ac6ede647"
 
-  def start(:normal, []) do
-    Agent.start_link(fn -> "" end, name: :session_id)
-  end
-
   def login(email, password) do
     request_body = %{ "email": email, "password": password } |> Poison.encode!
     case Client.post("/members/login", request_body) do
-      {:ok, %{headers: headers}} ->
-        store_cookie(headers)
-        :ok
-      {:error, _} ->
+      {:ok, %{headers: headers, status_code: 200}} ->
+        {:ok, find_session_id(headers)}
+      _ ->
         :error
     end
   end
 
-  def logout do
-    Agent.update(:session_id, fn(_) -> "" end)
-    :ok
+  def logged_in?(session_id) do
+    # TODO: send a simple request to redmart that will validate the session_id
+    session_id != nil && session_id != ""
   end
 
-  def logged_in? do
-    session_id != ""
-  end
-
-  def add_item(item_id, qty) do
+  def add_item(session_id, item_id, qty) do
     request_body = %{
       "session" => session_id,
       "id" => item_id,
@@ -48,7 +39,7 @@ defmodule Redmart.Client do
     end
   end
 
-  def cart() do
+  def cart(session_id) do
     query = %{
       "session" => session_id,
       "apiConsumerId" => @apiConsumerId
@@ -61,7 +52,7 @@ defmodule Redmart.Client do
     end
   end
 
-  def search(search_term, page_size \\ 10, page \\ 0) do
+  def search(session_id, search_term, page_size \\ 10, page \\ 0) do
     query = %{
       "q": search_term,
       "pageSize": page_size,
@@ -94,14 +85,6 @@ defmodule Redmart.Client do
 
   defp default_headers do
     [ "Content-Type": "application/json" ]
-  end
-
-  defp session_id do
-    Agent.get(:session_id, &(&1))
-  end
-
-  defp store_cookie(headers) do
-    Agent.update(:session_id, fn(_) -> find_session_id(headers) end)
   end
 
   def find_session_id(headers) do
