@@ -1,5 +1,5 @@
 defmodule Redmart.Models.CartGroup do
-  alias Redmart.Models.{Cart, CartGroup, Product}
+  alias Redmart.Models.{CartGroup, Product}
 
   defstruct [id: 0, items: [ %Product{} ]]
 

@@ -1,4 +1,5 @@
 defmodule Redmart.Client do
+  require Logger
   use HTTPoison.Base
   alias Redmart.Client
   alias Redmart.Models.{Cart, SearchResult, AddItemResponse}
@@ -10,7 +11,8 @@ defmodule Redmart.Client do
     case Client.post("/members/login", request_body) do
       {:ok, %{headers: headers, status_code: 200}} ->
         {:ok, find_session_id(headers)}
-      _ ->
+      {_, response} ->
+        Logger.debug("Redmart login failed: #{inspect(response)}")
         :error
     end
   end
